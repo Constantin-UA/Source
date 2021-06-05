@@ -19,9 +19,9 @@ const modals = () => {
 
 				windows.forEach((item) => {
 					item.style.display = 'none';
+					item.classList.add('animated', 'fadeIn');
 				});
 
-				onOffAnimate(modalSelector, 1);
 				modal.style.display = 'block';
 				document.body.style.overflow = 'hidden';
 				document.body.style.marginRight = `${scroll}px`;
@@ -29,8 +29,17 @@ const modals = () => {
 		});
 
 		close.addEventListener('click', () => {
-			onOffAnimate(modalSelector, 0);
-			setTimeout(() => {
+			windows.forEach((item) => {
+				item.style.display = 'none';
+			});
+
+			modal.style.display = 'none';
+			document.body.style.overflow = '';
+			document.body.style.marginRight = `0px`;
+		});
+
+		modal.addEventListener('click', (e) => {
+			if (e.target === modal && closeClickOverlay) {
 				windows.forEach((item) => {
 					item.style.display = 'none';
 				});
@@ -38,41 +47,12 @@ const modals = () => {
 				modal.style.display = 'none';
 				document.body.style.overflow = '';
 				document.body.style.marginRight = `0px`;
-			}, 1500);
-		});
-
-		modal.addEventListener('click', (e) => {
-			if (e.target === modal && closeClickOverlay) {
-				onOffAnimate(modalSelector, 0);
-				setTimeout(() => {
-					windows.forEach((item) => {
-						item.style.display = 'none';
-					});
-
-					modal.style.display = 'none';
-					document.body.style.overflow = '';
-					document.body.style.marginRight = `0px`;
-				}, 1500);
 			}
 		});
 	}
 
-	function onOffAnimate(selector, pos) {
-		if (pos === 1) {
-			document.querySelector(selector).classList.add('faded');
-			document.querySelector(selector).classList.remove('tofaded');
-		} else if (pos === 0) {
-			document.querySelector(selector).classList.remove('faded');
-			document.querySelector(selector).classList.add('tofaded');
-		} else {
-			document.querySelector(selector).classList.remove('faded');
-			document.querySelector(selector).classList.remove('tofaded');
-		}
-	}
-
 	function showModalByTime(selector, time) {
 		setTimeout(() => {
-			onOffAnimate(selector, 1);
 			document.querySelector(selector).style.display = 'block';
 			document.body.style.overflow = 'hidden';
 		}, time);

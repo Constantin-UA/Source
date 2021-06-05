@@ -12,6 +12,7 @@ const tabs = (
 	const hideTabContent = () => {
 		contents.forEach((item) => {
 			item.style.display = 'none';
+			item.classList.add('animated', 'fadeIn');
 		});
 
 		tabs.forEach((item) => {

@@ -5,7 +5,7 @@ const images = () => {
 
 	imgPopup.classList.add('popup');
 	workSection.appendChild(imgPopup);
-
+	imgPopup.classList.add('animated', 'fadeIn');
 	imgPopup.style.justifyContent = 'center';
 	imgPopup.style.alignItems = 'center';
 	imgPopup.style.display = 'none';
